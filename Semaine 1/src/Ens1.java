@@ -4,47 +4,71 @@ public class Ens1 extends EnsembleAbstrait {
 	private int cardinal;
 
 	public Ens1() {
-		//TODO
+		tabB = new boolean[MAX+1];
 	}
 	
 	public boolean estVide() {
-		//TODO
-		return false ;
+		return cardinal == 0 ;
 	}
 	
 	public Elt unElement() {
-		//TODO
-		return null ;
+		if (estVide())
+			throw new MathException();
+		for (int i = 1; i < tabB.length; i++) {
+			if (tabB[i]) {
+				return new Elt(i);
+			}
+		}
+		return null;
 	}
 
 	public boolean contient(Elt e) {
-		//TODO
-		return false ;
+		if (e == null || e.val()>=tabB.length)
+			throw new IllegalArgumentException();
+		return tabB[e.val()];
 	}
 
 	public void ajouter(Elt e) {
-		//TODO
-		
+		if (e == null || e.val() >= tabB.length)
+			throw new IllegalArgumentException();
+		if (!tabB[e.val()]) {
+			tabB[e.val()]=true;
+			cardinal++;
+		}
+
 	}
 
 	public void enlever(Elt e) {
-		//TODO
-		
+		if (e == null || e.val() >= tabB.length)
+			throw new IllegalArgumentException();
+		if (tabB[e.val()]) {
+			tabB[e.val()]=false;
+			cardinal--;
+		}
 	}
 
 	public int cardinal() {
-		//TODO
-		return 0 ;
+		return cardinal ;
 	}
 
 	public void complementer() {
-		//TODO
-		
+		for (int i = 1; i < tabB.length; i++) {
+			if (tabB[i]) {
+				tabB[i] = false;
+			} else {
+				tabB[i] = true;
+			}
+		}
+		cardinal=MAX-cardinal;
 	}
 
 	public String toString() {
-		// TODO
-		return null;
+		String text="{";
+		for (int i = 1; i < tabB.length; i++) {
+			if (tabB[i])
+				text+=i+",";
+		}
+		return text+"}";
 	}
 	
 }

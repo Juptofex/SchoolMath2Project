@@ -64,7 +64,7 @@ public class Ens2 extends EnsembleAbstrait {
 		for (int i = 1; i < MAX+1; i++) {
 			Elt x = new Elt(i);
 			if (!contient(x)) {
-				temp[index] = new Elt(x);
+				temp[index] = x;
 				index++;
 			}
 		}

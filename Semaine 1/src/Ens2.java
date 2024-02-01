@@ -4,48 +4,80 @@ public class Ens2 extends EnsembleAbstrait {
 	private int cardinal;
 
 	public Ens2() {
-		//TODO
-		
+		elements=new Elt[MAX];
 	}
 
 	public boolean estVide() {
-		//TODO
-		return false ;
+		return cardinal==0;
 	}
 	
 	public Elt unElement() {
-		//TODO
-		return null ;
+		if (estVide())
+			throw new MathException();
+		return elements[0];
 	}
 
 	public boolean contient(Elt e) {
-		//TODO
+		if (e == null)
+			throw new IllegalArgumentException();
+		if (estVide())
+			return false;
+		for (int i = 0; i < cardinal; i++) {
+			if (elements[i].equals(e))
+				return true;
+		}
 		return false ;
 	}
 
 	public void ajouter(Elt e) {
-		//TODO
-		
+		if (e==null)
+			throw new IllegalArgumentException();
+		if (!contient(e)) {
+			elements[cardinal] = e;
+			cardinal++;
+		}
 	}
 
 	public void enlever(Elt e) {
-		//TODO
-		
+		if (e==null)
+			throw new IllegalArgumentException();
+		boolean index=false;
+		for (int i = 0; i < cardinal; i++) {
+			if (elements[i].equals(e)) {
+				index=true;
+				cardinal--;
+			}
+			if (index) {
+				elements[i]=elements[i+1];
+			}
+		}
 	}
 
 	public int cardinal() {
-		//TODO
-		return 0;
+		return cardinal;
 	}
 
 	public void complementer() {
 		//TODO;
-		
+		Elt[] temp = new Elt[MAX];
+		int index=0;
+		for (int i = 1; i < MAX+1; i++) {
+			Elt x = new Elt(i);
+			if (!contient(x)) {
+				temp[index] = new Elt(x);
+				index++;
+			}
+		}
+		elements=temp;
+		cardinal=index;
 	}
 
 	public String toString() {
-		//TODO
-		return null ;
+		String text="{";
+		for (int i = 0; i < cardinal; i++) {
+			text+=elements[i].val()+",";
+		}
+		return text+"}";
 	}
 
 }

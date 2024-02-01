@@ -19,7 +19,7 @@ public class Ens1 extends EnsembleAbstrait {
 				return new Elt(i);
 			}
 		}
-		return null;
+		throw new InternalError();
 	}
 
 	public boolean contient(Elt e) {

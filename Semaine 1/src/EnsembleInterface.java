@@ -38,21 +38,27 @@ public interface EnsembleInterface {
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void ajouter(EnsembleInterface a) {
 		//TODO
-		
+		if (a==null || a.estVide())
+			throw new IllegalArgumentException();
+
 	}
 
 	// remplace this par this moins a
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void enlever(EnsembleInterface a) {
 		//TODO
-		
+		if (a==null || a.estVide())
+			throw new IllegalArgumentException();
+
 	}
 
 	// remplace this par this inter a
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void intersecter(EnsembleInterface a) {
 		//TODO
-		
+		if (a==null || a.estVide())
+			throw new IllegalArgumentException();
+
 	}
 	
 } // interface

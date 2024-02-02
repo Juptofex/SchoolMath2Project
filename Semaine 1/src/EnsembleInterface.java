@@ -37,12 +37,17 @@ public interface EnsembleInterface {
 	// remplace this par this union a
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void ajouter(EnsembleInterface a) {
-		//TODO
-		if (a==null || a.estVide())
-			throw new IllegalArgumentException();
+		if (a==null)
+			throw new IllegalArgumentException("Parameter 'a' cannot be null");
+		Elt[] temp = new Elt[a.cardinal()];
+		int index=0;
+		for (int i = 1; i <= MAX; i++) {
+			Elt x = new Elt(i);
+			if (a.contient(x))
+				temp[index++] = x;
+		}
 		for (int i = 0; i < a.cardinal(); i++) {
-			this.ajouter(a.unElement());
-			a.enlever(a.unElement());
+			this.ajouter(temp[i]);
 		}
 	}
 
@@ -50,9 +55,10 @@ public interface EnsembleInterface {
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void enlever(EnsembleInterface a) {
 		//TODO
-		if (a==null || a.estVide())
+		if (a==null)
 			throw new IllegalArgumentException();
-		for (int i = 0; i < a.cardinal(); i++) {
+		int index = a.cardinal();
+		for (int i = 0; i < index; i++) {
 			this.enlever(a.unElement());
 			a.enlever(a.unElement());
 		}
@@ -62,10 +68,11 @@ public interface EnsembleInterface {
 	// lance une IllegalArgumentException en cas de paramètre invalide
 	public default void intersecter(EnsembleInterface a) {
 		//TODO
-		if (a==null || a.estVide())
+		if (a==null)
 			throw new IllegalArgumentException();
+		int index = a.cardinal();
 		EnsembleInterface temp = null;
-		for (int i = 0; i < a.cardinal(); i++) {
+		for (int i = 0; i < index; i++) {
 			if (this.contient(a.unElement())) {
 				temp.ajouter(a.unElement());
 				a.enlever(a.unElement());

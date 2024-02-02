@@ -14,7 +14,7 @@ public class Ens2 extends EnsembleAbstrait {
 	public Elt unElement() {
 		if (estVide())
 			throw new MathException();
-		return elements[0];
+		return elements[cardinal];
 	}
 
 	public boolean contient(Elt e) {

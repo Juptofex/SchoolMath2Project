@@ -40,7 +40,10 @@ public interface EnsembleInterface {
 		//TODO
 		if (a==null || a.estVide())
 			throw new IllegalArgumentException();
-
+		for (int i = 0; i < a.cardinal(); i++) {
+			this.ajouter(a.unElement());
+			a.enlever(a.unElement());
+		}
 	}
 
 	// remplace this par this moins a
@@ -49,7 +52,10 @@ public interface EnsembleInterface {
 		//TODO
 		if (a==null || a.estVide())
 			throw new IllegalArgumentException();
-
+		for (int i = 0; i < a.cardinal(); i++) {
+			this.enlever(a.unElement());
+			a.enlever(a.unElement());
+		}
 	}
 
 	// remplace this par this inter a
@@ -58,7 +64,13 @@ public interface EnsembleInterface {
 		//TODO
 		if (a==null || a.estVide())
 			throw new IllegalArgumentException();
-
+		EnsembleInterface temp = null;
+		for (int i = 0; i < a.cardinal(); i++) {
+			if (this.contient(a.unElement())) {
+				temp.ajouter(a.unElement());
+				a.enlever(a.unElement());
+			}
+		}
 	}
 	
 } // interface

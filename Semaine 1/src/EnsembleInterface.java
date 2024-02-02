@@ -44,10 +44,7 @@ public interface EnsembleInterface {
 		for (int i = 1; i <= MAX; i++) {
 			Elt x = new Elt(i);
 			if (a.contient(x))
-				temp[index++] = x;
-		}
-		for (int i = 0; i < a.cardinal(); i++) {
-			this.ajouter(temp[i]);
+				this.ajouter(x);
 		}
 	}
 

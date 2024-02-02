@@ -39,8 +39,6 @@ public interface EnsembleInterface {
 	public default void ajouter(EnsembleInterface a) {
 		if (a==null)
 			throw new IllegalArgumentException("Parameter 'a' cannot be null");
-		Elt[] temp = new Elt[a.cardinal()];
-		int index=0;
 		for (int i = 1; i <= MAX; i++) {
 			Elt x = new Elt(i);
 			if (a.contient(x))

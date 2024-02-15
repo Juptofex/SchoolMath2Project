@@ -70,7 +70,7 @@ public class Relation extends RelationDeBase {
 	// si possible, remplace la relation courante par son union avec r
 	//sinon, lance une IllegalArgumentException
 	public void ajouter(RelationInterface r) {
-		if (r==null||!this.arrivee().equals(r.arrivee())||!this.depart().equals(r.depart()))
+		if (r==null||!arrivee().equals(r.arrivee())||!depart().equals(r.depart()))
 			throw new IllegalArgumentException();
 		for (Couple c : r) {
 			if (!contient(c))
@@ -81,7 +81,7 @@ public class Relation extends RelationDeBase {
 	// si possible, remplace this par sa différence avec r
 	//sinon, lance une IllegalArgumentException
 	public void enlever(RelationInterface r) {
-		if (r==null||!this.arrivee().equals(r.arrivee())||!this.depart().equals(r.depart()))
+		if (r==null||!arrivee().equals(r.arrivee())||!depart().equals(r.depart()))
 			throw new IllegalArgumentException();
 		for (Couple c : this.clone()) {
 			if (r.contient(c))
@@ -92,7 +92,7 @@ public class Relation extends RelationDeBase {
 	// si possible, remplace this par son intersection avec r
 	//sinon, lance une IllegalArgumentException
 	public void intersecter(RelationInterface r) {
-		if (r==null||!this.arrivee().equals(r.arrivee())||!this.depart().equals(r.depart()))
+		if (r==null||!arrivee().equals(r.arrivee())||!depart().equals(r.depart()))
 			throw new IllegalArgumentException();
 		for (Couple c : this.clone()) {
 			if (!r.contient(c))
@@ -103,8 +103,16 @@ public class Relation extends RelationDeBase {
 	// si possible, renvoie la composée : this après r
 	//sinon, lance une IllegalArgumentException
 	public Relation apres(RelationInterface r) {
-		//TODO
-		return null;
+		if (r == null||!r.arrivee().equals(depart()))
+			throw new IllegalArgumentException();
+		Relation temp = new Relation(r.depart(), arrivee());
+		for (Couple c1 : r) {
+			for (Couple c2 : this) {
+				if (c1.getY().equals(c2.getX()))
+					temp.ajouter(new Couple(c1.getX(), c2.getY()));
+			}
+		}
+		return temp;
 	}
 
 
@@ -119,16 +127,22 @@ public class Relation extends RelationDeBase {
 	// Clôture la Relation courante pour la réflexivité
 	public void cloReflex() {
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 	}
 
 	// Clôture la Relation courante pour la symétrie
 	public void cloSym() {
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 	}
 
 	// Clôture la Relation courante pour la transitivité (Warshall)
 	public void cloTrans() {
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 	}
 	
 	
@@ -140,30 +154,40 @@ public class Relation extends RelationDeBase {
 	// renvoie true ssi this est réflexive
 	public boolean reflexive(){
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 		return false;
 	}
 
 	// renvoie true ssi this est antiréflexive
 	public boolean antireflexive(){
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 		return false;
 	}
 
 	// renvoie true ssi this est symétrique
 	public boolean symetrique(){
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 		return false;
 	}
 
 	// renvoie true ssi this est antisymétrique
 	public boolean antisymetrique(){
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 		return false;
 	}
 
 	// renvoie true ssi  this est transitive
 	public boolean transitive(){
 		//TODO
+		if (!arrivee().equals(depart()))
+			throw new MathException();
 		return false;
 	}
 	

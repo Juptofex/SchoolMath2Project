@@ -5,8 +5,13 @@ public abstract class RelationAbstraite implements RelationInterface {
 	// Ex 3
 	// renvoie true ssi this est inclus dans r
 	public boolean inclusDans(RelationAbstraite r) {
-		//TODO
-		return false;
+		if (r==null||!this.arrivee().equals(r.arrivee())||!this.depart().equals(r.depart()))
+			return false;
+		for (Couple c : this) {
+			if (!r.contient(c))
+				return false;
+		}
+		return true;
 	}
 
 	// renvoie true ssi this est égale à o
@@ -15,10 +20,8 @@ public abstract class RelationAbstraite implements RelationInterface {
 		if (o==this) return true;
 		if (! (o instanceof RelationAbstraite)) return false;
 		RelationAbstraite r = (RelationAbstraite) o;
-		//TODO Vérifier que la relation courante est égale à r
-		
-		
-		return false;
+		// Vérifier que la relation courante est égale à r
+		return this.hashCode()==r.hashCode();
 	}
 	
 	//renvoie un hashCode associé à la relation
